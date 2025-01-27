@@ -46,7 +46,7 @@ const LoginSignup = () => {
           }}
         >
           <img
-            src="/public/assets/sustainable/icons8-sustainable-60.svg"
+            src="/assets/sustainable/icons8-sustainable-60.svg"
             alt="Logo"
             style={{
               width: "100px",
@@ -156,7 +156,7 @@ const LoginSignup = () => {
           }}
         >
           <img
-            src="images/5400453 - Copy-Photoroom.png-Photoroom.png"
+            src="/assets/sustainable/icons8-sustainable-60.svg"
             alt="Logo"
             style={{
               width: "100px",
