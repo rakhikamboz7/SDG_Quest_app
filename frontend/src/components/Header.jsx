@@ -28,7 +28,7 @@ const Header = () => {
     await signOut(auth);
     localStorage.removeItem("user");
     setUser(null);
-    navigate("/login");
+    navigate("/signup");
   };
 
   return (

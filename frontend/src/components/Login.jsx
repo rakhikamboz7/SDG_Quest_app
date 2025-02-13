@@ -51,7 +51,7 @@ function LoginSignup() {
     }
 
     try {
-      await axios.post("http://127.0.0.1:5005/register", formData);
+      await axios.post("http://localhost:5005/register", formData);
 
       alert('Registration successful!');
       resetForm();
@@ -73,17 +73,18 @@ function LoginSignup() {
         email,
         password,
       });
-     
 
 
       const token = res.data.token;
       localStorage.setItem('token', token);
+      localStorage.setItem('userId', res.data.userId);
 
       const userRes = await axios.get('http://localhost:5005/user', {
         headers: { Authorization: `Bearer ${token}` },
       });
 
       const userData = {
+        // id: userRes.data._id,
         name: userRes.data.name,
         email: userRes.data.email,
         profilePicture: userRes.data.profilePicture,

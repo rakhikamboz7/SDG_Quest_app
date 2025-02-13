@@ -58,7 +58,7 @@ const ProfilePage = () => {
   // Logout Function
   const handleLogout = () => {
     localStorage.removeItem("user");
-    navigate("/login");
+    navigate("/signup");
   };
 
   return (

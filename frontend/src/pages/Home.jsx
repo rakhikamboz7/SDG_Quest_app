@@ -181,13 +181,12 @@ const Home = () => {
         <div className="grid mt-10 mb-15 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {goalsData.map((goal) => {
             // Debug logs
-            console.log("Current goal:", goal);
-            const matchingQuiz = quizzes.find(quiz => {
-              console.log("Comparing:", quiz._id, goal.id); // Debug log
+            // console.log("Current goal:", goal);
+            const matchingQuiz = quizzes?.find(quiz => {
+              // console.log("Comparing:", quiz._id, goal.id); // Debug log
               return quiz.goalId === goal.id;
             });
-            console.log("Matching quiz:", matchingQuiz); // Debug log
-
+            console.log("Matching quiz:", matchingQuiz); 
             return (
               <div
                 key={goal.id}
