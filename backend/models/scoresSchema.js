@@ -1,11 +1,13 @@
-// scoresSchema.js
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const scoreSchema = new mongoose.Schema({
-  userId: { type: String, required: true }, // User ID (e.g., from authentication)
-  quizId: { type: String, required: true },  // Quiz ID (likely your goalId)
-  score: { type: Number, required: true },   // Score achieved
-  timestamp: { type: Date, default: Date.now } // Timestamp for when the score was recorded
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    quizId: { type: mongoose.Schema.Types.ObjectId, ref: "Quiz", required: true },
+    // goalId: { type: mongoose.Schema.Types.ObjectId, required: true },
+    score: { type: Number, required: true },
+    totalQuestions: { type: Number, required: true },
+    createdAt: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('Score', scoreSchema);
+module.exports = mongoose.model("Score", scoreSchema);
+

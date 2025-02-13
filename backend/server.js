@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const Quiz = require("./models/quiz");
+const scoreRoutes = require('./routes/scoreRoutes');
 const path = require('path');
 
 const app = express();
@@ -26,12 +27,12 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", UserSchema);
 
-const ImageSchema = new mongoose.Schema({
-  profilePicture: String,
+// const ImageSchema = new mongoose.Schema({
+//   profilePicture: String,
 
-});
+// });
 
-const Image = mongoose.model("Image", ImageSchema)
+// const Image = mongoose.model("Image", ImageSchema)
 
 const storage = multer.diskStorage({
   destination: "./uploads/", // Store images in 'uploads' folder
@@ -72,6 +73,46 @@ app.use(cors({
   credentials: true
 }));
 
+app.use(scoreRoutes);
+
+// Middleware to verify token and extract userId
+const authenticateUser = async (req, res, next) => {
+  try {
+    console.log("Tokemn----->", token)
+      const token = req.headers.authorization?.split(' ')[1];
+      
+      if (!token) {
+          return res.status(401).json({ error: 'No token provided' });
+      }
+
+      const decoded = jwt.verify(token, JWT_SECRET);
+      req.userId = decoded.id;  // Add userId to request object
+      next();
+  } catch (error) {
+      res.status(401).json({ error: 'Invalid token' });
+  }
+};
+
+// Use middleware in routes
+app.post('/api/scores', async (req, res) => {
+  // Now you can access req.userId here
+  const { points, quizId } = req.body;
+  const userId = req.userId;  // Get userId from middleware
+
+  try {
+      const newScore = new Score({
+          userId,
+          quizId,
+          points
+      });
+      await newScore.save();
+      res.json({ message: 'Score saved successfully' });
+  } catch (error) {
+      res.status(500).json({ error: 'Error saving score' });
+  }
+});
+
+
 
 
 // Test Route
@@ -97,7 +138,6 @@ app.post("/register", upload.single("image"), async (req, res) => {
   }
 });
 
-// Login Endpoint
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -105,15 +145,20 @@ app.post("/login", async (req, res) => {
     if (!user) return res.status(404).json({ error: "User not found" });
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid)
-      return res.status(401).json({ error: "Invalid credentials" });
+    if (!isPasswordValid) return res.status(401).json({ error: "Invalid credentials" });
 
     const token = jwt.sign({ id: user._id }, JWT_SECRET);
-    res.json({ token });
+    res.json({ 
+      token,
+      userId: user._id  // Send userId in response
+    });
   } catch (err) {
     res.status(500).json({ error: "Server error" });
   }
 });
+
+
+
 
 // User Data Endpoint
 app.get("/user", async (req, res) => {
@@ -138,6 +183,27 @@ app.get("/user", async (req, res) => {
 
 const quizRoutes= require("./routes/quizRoutes");
 app.use("/api/quizzes", quizRoutes);
+
+
+app.post('/api/scores', async (req, res) => {
+  try {
+      const { userId, score } = req.body; // Extract userId and score
+
+      if (!userId || !score) {
+          return res.status(400).json({ message: "Missing userId or score" });
+      }
+
+      // Example: Save score to database
+      const result = await ScoreModel.create({ userId, score });
+
+      res.status(201).json({ message: "Score saved successfully", result });
+  } catch (error) {
+      console.error("Error saving score:", error);
+      res.status(500).json({ message: "Internal Server Error", error });
+  }
+});
+
+app.use("/api/scores", scoreRoutes);
 
 
 
