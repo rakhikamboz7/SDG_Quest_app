@@ -73,6 +73,9 @@ function LoginSignup() {
         email,
         password,
       });
+     
+
+
       const token = res.data.token;
       localStorage.setItem('token', token);
 
@@ -98,16 +101,16 @@ function LoginSignup() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
+    <div className="flex items-center justify-center bg-gray-100">
       {!user ? (
-        <div className="relative bg-white w-[800px] max-w-full min-h-[500px] rounded-3xl shadow-lg overflow-hidden transition-all duration-500 flex">
+        <div className="mt-10 relative bg-white w-[800px] max-w-full min-h-[400px] h-[550px]  rounded-3xl shadow-lg overflow-hidden transition-all duration-500 flex">
          
           <div
-            className={`flex flex-col items-center justify-center p-10 w-1/2 transition-opacity duration-500 ${
+            className={`flex flex-col items-center justify-center p-15 w-1/2 transition-opacity duration-500 ${
               isSignUp ? "opacity-0 pointer-events-none" : "opacity-100 pointer-events-auto"
             }`}
           >
-            <img src="logo.svg" alt="Logo" className="w-20 h-20 mb-4 rounded-full" />
+            <img src="logo.svg" alt="Logo" className="w-15 h-25 mb-4 rounded-full" />
             <h1 className="text-2xl mb-5 font-semibold">Sign In</h1>
             <div className="flex justify-center mb-4 space-x-4">
               <button className="text-2xl cursor-pointer"><FaGoogle /></button>
@@ -123,19 +126,19 @@ function LoginSignup() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
-                className="w-full p-3 mb-3 border rounded-md text-sm outline-none focus:ring focus:ring-blue-300"
+                className="w-full p-2 mb-2 border rounded-md text-sm outline-none focus:ring focus:ring-blue-300"
               />
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
-                className="w-full p-3 mb-3 border rounded-md text-sm outline-none focus:ring focus:ring-blue-300"
+                className="w-full p-2 mb-2 border rounded-md text-sm outline-none focus:ring focus:ring-blue-300"
               />
               <button
                 type="submit"
                 disabled={loading}
-                className="bg-teal-700 text-white px-6 py-2 rounded-md focus:outline-none hover:bg-teal-600 disabled:opacity-50 ml-27"
+                className="bg-teal-700 text-white px-6 py-2 rounded-md focus:outline-none hover:bg-teal-600 disabled:opacity-50 ml-21"
               >
                 {loading ? 'Signing In...' : 'Sign In'}
               </button>
@@ -144,11 +147,11 @@ function LoginSignup() {
 
           {/* Sign Up Form */}
           <div
-            className={`flex flex-col items-center justify-center p-10 w-1/2 transition-opacity duration-500 ${
+            className={`flex flex-col items-center justify-center p-15 w-1/2 transition-opacity duration-500 ${
               isSignUp ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
             }`}
           >
-            <img src="logo.svg" alt="Logo" className="w-20 h-20 mb-4 rounded-full" />
+            <img src="public\logo.svg" alt="Logo" className="w-15 h-20 mt-0" />
             <h1 className="text-2xl mb-5 font-semibold">Create an Account</h1>
             <div className="flex justify-center mb-4 space-x-4">
               <button className="text-2xl cursor-pointer"><FaGoogle /></button>
@@ -164,38 +167,38 @@ function LoginSignup() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Name"
-                className="w-full p-3 mb-3 border rounded-md text-sm outline-none focus:ring focus:ring-blue-300"
+                className="w-full p-2 mb-2 border rounded-md text-sm outline-none focus:ring focus:ring-blue-300"
               />
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
-                className="w-full p-3 mb-3 border rounded-md text-sm outline-none focus:ring focus:ring-blue-300"
+                className="w-full p-2 mb-2 border rounded-md text-sm outline-none focus:ring focus:ring-blue-300"
               />
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
-                className="w-full p-3 mb-3 border rounded-md text-sm outline-none focus:ring focus:ring-blue-300"
+                className="w-full p-2 mb-2 border rounded-md text-sm outline-none focus:ring focus:ring-blue-300"
               />
               <input
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Confirm Password"
-                className="w-full p-3 mb-3 border rounded-md text-sm outline-none focus:ring focus:ring-blue-300"
+                className="w-full p-2 mb-2 border rounded-md text-sm outline-none focus:ring focus:ring-blue-300"
               />
               <input
                 type="file"
                 onChange={(e) => setImage(e.target.files[0])}
-                className="w-full p-3 mb-3 border rounded-md text-sm outline-none focus:ring focus:ring-blue-300"
+                className="w-full p-2 mb-2 border rounded-md text-sm outline-none focus:ring focus:ring-blue-300"
               />
               <button
                 type="submit"
                 disabled={loading}
-                className="bg-teal-700 text-white px-6 py-2 rounded-md focus:outline-none hover:bg-teal-600 disabled:opacity-50 ml-27 justify-center"
+                className="bg-teal-700 text-white px-6 py-2 rounded-md focus:outline-none hover:bg-teal-600 disabled:opacity-50 ml-22 justify-center"
               >
                 {loading ? 'Signing Up...' : 'Sign Up'}
               </button>

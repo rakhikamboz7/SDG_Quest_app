@@ -33,7 +33,7 @@ const KnowledgeBites = () => {
       <Header /><br/> <br/><br/>
       <div className="container mx-auto px-4 py-16">
         <div className=" p-8 rounded-lg  mb-10">
-          <h1 className="text-4xl font-bold text-[#036666] mb-4">
+          <h1 className="text-4xl font-bold text-yellow-500 mb-4">
             Welcome to SDG Knowledge Hub!
           </h1>
           <p className="text-[#036666] text-lg">

@@ -5,8 +5,8 @@ const multer = require("multer");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
-const Quiz = require("./models/Quiz");
-
+const Quiz = require("./models/quiz");
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 5005;
@@ -14,6 +14,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "your_secret_key";
 
 // Database Connection
 const connectDB = require("./db/connect");
+
 
 // User Schema and Model
 const UserSchema = new mongoose.Schema({
@@ -25,12 +26,45 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", UserSchema);
 
+const ImageSchema = new mongoose.Schema({
+  profilePicture: String,
+
+});
+
+const Image = mongoose.model("Image", ImageSchema)
+
+const storage = multer.diskStorage({
+  destination: "./uploads/", // Store images in 'uploads' folder
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+
+const upload = multer({ storage });
+
+// // API to upload and update user profile image
+// router.post("/upload-profile", upload.single("profilePicture"), async (req, res) => {
+//   try {
+//     const { userId } = req.body;
+//     const imagePath = `/uploads/${req.file.filename}`; // Save the image path
+
+//     const user = await User.findByIdAndUpdate(userId, { profilePicture: imagePath }, { new: true });
+
+//     res.json({
+//       message: "Profile image updated successfully",
+//       profilePicture: `http://localhost:5005${user.profilePicture}`,
+//     });
+//   } catch (error) {
+//     res.status(500).json({ message: "Error uploading image", error });
+//   }
+// });
+
 
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/uploads", express.static("uploads"));
+
 app.use(cors({
   origin: 'http://localhost:5173',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
@@ -38,12 +72,7 @@ app.use(cors({
   credentials: true
 }));
 
-// Multer Configuration for Image Uploads
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, "uploads/"),
-  filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
-});
-const upload = multer({ storage });
+
 
 // Test Route
 app.get("/", (req, res) => {
@@ -107,8 +136,8 @@ app.get("/user", async (req, res) => {
 
 
 
-
-app.use("/api/quizzes", require("./routes/quizRoutes"));
+const quizRoutes= require("./routes/quizRoutes");
+app.use("/api/quizzes", quizRoutes);
 
 
 

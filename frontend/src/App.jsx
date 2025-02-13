@@ -1,26 +1,34 @@
-import Content from './pages/Home';
-import Home from './pages/Homepage';
+import { Routes, Route } from "react-router-dom";
+import { MantineProvider } from "@mantine/core";
+import '@mantine/core/styles.css';
+import '@mantine/carousel/styles.css';
+
+
+import Home from './pages/Home';
+import HomePage from './pages/Homepage';
 import SDGQuiz from './pages/QuizesPage';
 import LoginSignup from './components/Login';
 import GoalContent from './components/goalContent';
 import KnowledgeBites from './pages/knowledgeBites';
-import { Routes, Route } from "react-router-dom"; // No need to import `Router`
-import Dashboard from './pages/Dashboard';
-import HomePage from './pages/Home';
+import ProfilePage from "./pages/Dashboard";
+
 
 const App = () => {
     return (
-        <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<HomePage />} />
-
-            <Route path="/Content" element={<Content />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/goal/:id" element={<GoalContent />} />
-            <Route path="/quiz/:id" element={<SDGQuiz />} />
-            <Route path="/knowledge" element={<KnowledgeBites />} />
-            <Route path="/login" element={<LoginSignup />} />
-        </Routes>
+        <MantineProvider withGlobalStyles withNormalizeCSS>
+        
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/home" element={<Home />} />
+                    <Route path="/profile" element={<ProfilePage />} />
+                    <Route path="/goal/:id" element={<GoalContent />} />
+                    <Route path="/quiz/:goalId" element={<SDGQuiz />} />
+                    <Route path="/knowledge" element={<KnowledgeBites />} />
+                    <Route path="/signup" element={<LoginSignup />} />
+                </Routes>
+               
+            
+        </MantineProvider>
     );
 };
 

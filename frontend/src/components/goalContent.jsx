@@ -5,7 +5,7 @@ import { goalDetails } from "../goalDetail";
 import { useNavigate } from "react-router-dom";
 
 
-import Footer from "./Footer";
+
 
 const GoalContent = () => {
   const navigate = useNavigate(); 
@@ -25,7 +25,10 @@ const GoalContent = () => {
     <div className="min-h-screen bg-gray-100">
       <Header />
       <br /><br /><br /><br />
+      
       <div className="container mx-auto px-6 py-12">
+        
+
         <div className="rounded-lg shadow-lg p-6 mb-6 flex items-center bg-pink"
           style={{ background: `${goal.color}` }}>
           
@@ -45,8 +48,8 @@ const GoalContent = () => {
 
           <h2 className="text-2xl font-bold text-white ml-4">{goal.title}</h2>
           <button
-  onClick={() => navigate(`/quiz/${id}`)} // Pass goal ID to the quiz page
-  className="bg-yellow-500 text-white px-4 py-2 rounded-md text-sm ml-210 hover:bg-yellow-600"
+  onClick={() => navigate(`/quiz/${id}`)} 
+  className="bg-white absolute text-teal-700 font-bold px-4 py-2 rounded-md text-sm ml-250 hover:bg-teal-600 hover:text-white"
 >
   Start Quiz
 </button>
@@ -113,8 +116,9 @@ const GoalContent = () => {
           </div>
         </div>
       </div>
-      <Footer />
-    </div>
+      
+      </div>
+     
   );
 };
 
