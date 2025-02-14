@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../../../backend/firebase";
+import { auth } from "../../../prevBackend/firebase";
 import logo from '../assets/logo.svg'; 
 
 const Header = () => {
@@ -41,9 +41,9 @@ const Header = () => {
       <div className="flex items-right ml-130 space-x-6 font-bold "> 
         <Link to="/home" className="text-[#00786F] hover:text-green-800">Learn Goals</Link>
         <Link to="/knowledge" className="text-[#00786F] hover:text-green-800">Knowledge Bites</Link>
-        <Link to="/quiz/:id" className="text-[#00786F] hover:text-green-800">Start Quiz</Link>
+        <Link to="/quiz/1" className="text-[#00786F] hover:text-green-800">Start Quiz</Link>
         
-           
+        {/* navigate(`/quiz/${goal.id}`); */}
           
             </div>
          

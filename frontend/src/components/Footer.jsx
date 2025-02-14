@@ -16,9 +16,9 @@ const Footer = () => {
           <div className="flex justify-between items-center w-250">
             <div className="relative bottom-20 left-100 grid grid-cols-3 gap-x-6 gap-y-1 ml-100">
               <a href="/about" className="hover:text-green-800">About</a>
-              <a href="/dashboard" className="hover:text-green-800">Dashboard</a>
+              <a href="/profile" className="hover:text-green-800">Dashboard</a>
               <a href="/contact" className="hover:text-green-800">Contact Us</a>
-              <a href="/learn-goals" className="hover:text-green-800">Learn Goals</a>
+              <a href="/home" className="hover:text-green-800">Learn Goals</a>
               <a href="/privacy" className="hover:text-green-800">Privacy Policy</a>
               <a href="/play-quiz" className="hover:text-green-800">Play Quiz</a>
             </div>

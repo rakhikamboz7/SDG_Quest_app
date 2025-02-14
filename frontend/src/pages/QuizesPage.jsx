@@ -312,6 +312,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
+// import { useParams } from "react-router-dom";
 
 function QuizPage() {
     const { goalId } = useParams();
@@ -324,6 +325,8 @@ function QuizPage() {
     const [score, setScore] = useState(0);
     const [showResult, setShowResult] = useState(false);
     const [allQuizzes, setAllQuizzes] = useState([]);
+
+    // const { id } = useParams()
 
     useEffect(() => {
         setCurrentQuestion(0);
@@ -391,6 +394,7 @@ function QuizPage() {
               'http://localhost:5005/api/scores/submit',
               {
                   userId,
+                  goalId: goalId,
                   quizId: "679f53b42151bff9a541565c",  // Use the actual quiz ID
                   score: quizScore,
                   totalQuestions: quiz.questions.length
