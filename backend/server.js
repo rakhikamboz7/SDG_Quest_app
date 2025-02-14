@@ -93,8 +93,12 @@ const authenticateUser = async (req, res, next) => {
   }
 };
 
+
+app.use(express.json()); 
+
 // Use middleware in routes
 app.post('/api/scores', async (req, res) => {
+  console.log("Received Data:", req.body);
   // Now you can access req.userId here
   const { points, quizId } = req.body;
   const userId = req.userId;  // Get userId from middleware

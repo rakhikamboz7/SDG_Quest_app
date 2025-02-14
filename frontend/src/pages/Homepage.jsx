@@ -9,6 +9,7 @@ import Header from "../components/Header";
 import homeImg from "../assets/home6.jpg";
 import missionImage1 from '../assets/home2.jpg'; // Replace with your appropriate images
 import missionImage2 from '../assets/home6.jpg';
+import { useNavigate } from "react-router-dom";
 
 const videos = [
   { id: "0XTBYMfZyrM", title: "Introduction to SDGs" },
@@ -70,7 +71,8 @@ const MissionSection = () => {
                     <p className="text-black mt-2 ml-5 relative left-0 text-md leading-relaxed">
                     Empowering minds through interactive learning, Awareness and Action Towards Sustaiable Development Goals. SDG Quest&#39;s mission is to inspire and educate individuals about the 17 Sustainable Development Goals.                        We not only Raises Awareness of SDGs but also promotes active participation through gamified learningand actionable advice. It bridges te Gap between Knowledge and action, empowring users  to contribute meaningfully to global sustainability efforts.
                     </p>
-                    <motion.button className=" mt-5 px-1 py-1 ml-5 bg-teal-600 text-white rounded-lg hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-800 transition w-[130px]" whileHover={{ scale: 1.05 }}>Learn More</motion.button>
+                    <motion.button className=" mt-5 px-1 py-1 ml-5 bg-teal-600 text-white rounded-lg hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-800 transition w-[130px]" whileHover={{ scale: 1.05 }}
+                    onClick={() => navigate("/about")}>Learn More</motion.button>
 
             {/* Two-Section Layout */}
             
@@ -177,7 +179,7 @@ const ResourceCarousel = () => {
           </div>
         ))}
       </div>
-      <button className="absolute ml-270 top-53 transform -translate-y-1/2 bg-teal-600 text-white p-2 rounded-full shadow-md hover:bg-teal-500 transition" onClick={() => scroll("right")}>
+      <button className="absolute ml-305 top-53 transform -translate-y-1/2 bg-teal-600 text-white p-2 rounded-full shadow-md hover:bg-teal-500 transition" onClick={() => scroll("right")}>
         <FaChevronRight size={24} />
       </button>
     </div>
@@ -193,8 +195,8 @@ const ShuffleCard = () => {
   };
 
   return (
-    <div><h3 className="ml-20 relative left-60 text-4xl font-bold text-teal-800 mt-5">Try Shuffling the Cards!</h3>
-    <div className=" ml-30 center w-200 flex flex-col mt-5 items-start bg-white p-6 rounded-2xl shadow-xl">
+    <div><h3 className="ml-35 relative left-60 text-4xl font-bold text-teal-800 mt-5">Try Shuffling the Cards!</h3>
+    <div className=" ml-48 center w-200 flex flex-col mt-5 items-start bg-white p-6 rounded-2xl shadow-xl">
       
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -30 }} transition={{ duration: 0.5 }} className="text-center">
         <h2 className="text-2xl mr-70 font-bold text-teal-700 mb-4">{flashcards[index].question}</h2>
@@ -219,6 +221,7 @@ const ShuffleCard = () => {
 };
 
 function HomePage() {
+  const navigate = useNavigate();
   return (
     <>
       <Header /><br/><br/><br/>
@@ -229,15 +232,13 @@ function HomePage() {
             <span className="text-lg ml-40 text-teal-700 mb-1"></span>
             <p className="text-gray-700 mb-4">Chart your path to a sustainable future—discover, engage, and transform the world with SDG Quest as your guide to mastering meaningful change.</p>
           </div>
-          <motion.img src={homeImg} alt="Illustration of Sustainable Development Goals" className="max-w-sm md:max-w-md lg:max-w-lg h-auto rounded-xl shadow-lg" whileHover={{ scale: 1.05 }} />
+          <motion.img src={homeImg} alt="Illustration of Sustainable Development Goals" className="max-w-300 md:max-w-md  lg:max-w-lg h-74 w-400 rounded-xl shadow-lg" whileHover={{ scale: 1.05 }} />
         </div>
 
         <MissionSection />
         
-
-        
-          {/* Shuffle Card and Inspiration - Two Column Layout */}
-          <section className="py-10 px-10 md:px-10 bg-gray-40">
+       
+                   <section className="py-10 px-10 md:px-10 bg-gray-40">
                 <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-4"> {/* Two-column grid */}
                     <ShuffleCard />
                     

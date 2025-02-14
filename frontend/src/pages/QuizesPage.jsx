@@ -76,58 +76,28 @@ function QuizPage() {
         }
     };
     
-    const saveScore = async (quizScore) => {
+    const saveScore = async () => {
         try {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                alert("No token found!");
-                return;
-            }
+            console.log("Sending Data:", {
+                userId,
+                goalId,
+                totalQuestions: quizzes.length,
+                correctAnswers: score
+            });
     
-            const userId = localStorage.getItem('userId');  // Assuming you stored userId in localStorage
-            if (!userId) {
-                alert("User not logged in!");
-                return;
-            }
+            await axios.post('http://localhost:5005/api/scores', {
+                userId,
+                goalId,
+                totalQuestions: quizzes.length,
+                correctAnswers: score
+            });
     
-            const response = await axios.post('http://localhost:5005/api/scores', {
-                userId,             
-                quizId: "679f53b42151bff9a541565c",     
-                           
-                score: quizScore,
-                totalQuestions: quiz.questions.length  // Ensure you send this value
-            },
-            //  {
-            //     headers: {
-            //         'Authorization': `Bearer ${token}`
-            //     }
-            );
-    
-            console.log('Score saved successfully:', response.data);
+            console.log("Score saved successfully!");
         } catch (error) {
-            console.error('Error saving score:', error);
-            alert("Error saving score. Please try again later.");
+            console.error("Error saving score:", error.response?.data || error.message);
         }
     };
     
-
-//   const fetchTotalPoints = async () => {
-//       try {
-//           const token = localStorage.getItem('token');
-//           if(!token){
-//             console.error("No token found!")
-//             return;
-//           }
-//           const response = await axios.get('http://localhost:5005/api/scores/total', {
-//               headers: { 'Authorization': `Bearer ${token}` }
-//           });
-//           setTotalPoints(response.data.totalPoints);
-//       } catch (error) {
-//           console.error('Error fetching total points:', error);
-//           setTotalPoints(0); //Set to 0 to prevent displaying undefined
-//           alert("Error fetching total points. Please try again later.");
-//       }
-//   };
 
   
     const handleNextQuiz = () => {
@@ -199,9 +169,7 @@ function QuizPage() {
       <div className="flex flex-col items-center mt-8 p-4 max-w-xl mx-auto bg-white shadow-lg rounded-lg">
       <div className="w-full flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold">Quiz for Goal {goalId}</h1>
-          {/* <div className="bg-teal-700 text-white px-4 py-2 rounded-lg">
-              Total Points: {totalPoints}
-          </div> */}
+          
       </div>
 
             {/* Progress Bar */}
